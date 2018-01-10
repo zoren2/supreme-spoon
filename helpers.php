@@ -1,7 +1,7 @@
 <?php
 
 function write_header() {
-  echo <<<EOT
+  echo <<<EOD
 	<!DOCTYPE html>
 	<html lang="en">
 
@@ -26,11 +26,11 @@ function write_header() {
   </head>
 
   <body>
-EOT;
+EOD;
 }
 
 function write_banner() {
-	echo <<<EOT
+	echo <<<EOD
   <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top navbar-inverse">
       <div class="container">
@@ -65,41 +65,44 @@ function write_banner() {
       <div class="bg-circle-3 bg-circle"></div>
       <div class="bg-circle-4 bg-circle"></div>
     </header>
-EOT;
+EOD;
 }
 
 // Creates content sections in the middle of the page
 function write_sections($data) {
+
+  // Navigates JSON data to access Reddit threads
 	foreach($data['data']['children'] as $children) {
 		$url = $children['data']['url'];
+    $title = $children['data']['title'];
 		$content = ''; // Accumulates content from Reddit Images
 
-		if(url_contains_image($url)) {
-
-			$content .= '<section>
-      		<div class="container">
-        		<div class="row align-items-center">
-          			<div class="col-lg-6 order-lg-2">
-            			<div class="p-5">
-              				<img class="img-fluid" src="';
-    		$content .=  $url;
-    		$content .='" alt="">
+    if(url_contains_image($url)) {
+      $content = <<<EOD
+          <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-lg-2">
+                  <div class="p-5">
+                      <img class="img-fluid" src=${url} alt="">
             </div>
-          		</div>
-          			<div class="col-lg-6 order-lg-1">
-            			<div class="p-5">
-              				<h2 class="display-4">Textholder Title</h2>
-              				<p>Placeholder Text</p>
-            		</div></div></div></div></section>';
-		} // End If
-	echo $content;
+              </div>
+                <div class="col-lg-6 order-lg-1">
+                  <div class="p-5">
+                      <h2 class="display-5">
+                        ${title}
+                      </h2>
+                      <p>Placeholder Text</p>
+                </div></div></div></div></section>';
+EOD;
+    } // End If
+  echo $content;
 	} // end foreach
 }
 
 // Creates footer for page
 function write_footer() {
 echo <<<EOT
-<!-- Footer -->
+  <!-- Footer -->
     <footer class="py-5 bg-black">
       <div class="container">
         <p class="m-0 text-center text-white small">Copyright &copy; Supreme Spoon 2018</p>
@@ -112,8 +115,8 @@ echo <<<EOT
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
 
-  </body>
-</html>
+    </body>
+  </html>
 EOT;
 }
 
