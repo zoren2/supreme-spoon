@@ -1,0 +1,27 @@
+{
+  "name": "supreme-spoon",
+  "version": "1.0.0",
+  "description": "Project Supreme Spoon",
+  "main": "index.js",
+  "scripts": {
+       "build-css": "node-sass --include-path scss scss/main.scss css/main.css",
+       "watch-css": "nodemon -e scss -x \"npm run build-css\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zoren2/supreme-spoon.git"
+  },
+  "author": "Jack T.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zoren2/supreme-spoon/issues"
+  },
+  "homepage": "https://github.com/zoren2/supreme-spoon#readme",
+  "dependencies": {
+    "bootstrap": "^4.0.0-alpha.6"
+  },
+  "devDependencies": {
+    "node-sass": "^4.7.2",
+    "nodemon": "^1.14.10"
+  }
+}
