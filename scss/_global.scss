@@ -1,5 +1,9 @@
 body {
   @include body-font;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  margin: 0%;
 }
 
 h1,
