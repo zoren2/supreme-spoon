@@ -93,26 +93,27 @@ function write_sections($data) {
 
   // Navigates JSON data to access Reddit threads
 	foreach($data['data']['children'] as $children) {
-		$url = $children['data']['url'];
+		$imageurl = $children['data']['url'];
     $title = $children['data']['title'];
+    $redditurl = $children['data']['permalink'];
 		$content = ''; // Accumulates content from Reddit Images
 
-    if(url_contains_image($url)) {
+    if(url_contains_image($imageurl)) {
       $content = <<<EOD
           <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 order-lg-2">
                   <div class="p-5">
-                      <img class="img-fluid" src=${url} alt="">
+                      <img class="img-fluid" src=${imageurl} alt="">
             </div>
               </div>
                 <div class="col-lg-6 order-lg-1">
                   <div class="p-5">
                       <h2 class="display-5">
-                        ${title}
+                        <a href="https://reddit.com${redditurl}"> ${title} </a>
                       </h2>
                       <p>Placeholder Text</p>
-                </div></div></div></div></section>';
+                </div></div></div></div></section>;
 EOD;
     } // End If
   echo $content;
