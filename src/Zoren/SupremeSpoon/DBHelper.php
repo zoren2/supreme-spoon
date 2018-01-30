@@ -36,11 +36,12 @@ class DBHelper
 	 */
 	public function updatePosts($subreddit, $resp) {
 		$conn = $this->getConnection();
-		$stmt = $this->conn->prepare($sqlquery);
+		
 		$sqlquery = "INSERT IGNORE INTO posts
                         (subreddit, imageurl, thumburl, title, permalink, datecreated)
                         VALUES (:subreddit, :imageurl, :thumburl, :title, :permalink, :datecreated)";
-
+		$stmt = $this->conn->prepare($sqlquery);
+		
 		foreach($resp as $key => $array) {
 			if(!$this->fetchPermalink($array['permalink'])) {
                 $stmt->execute([

@@ -5,6 +5,8 @@ use Zoren\SupremeSpoon\RegExp;
 use Zoren\SupremeSpoon\DBHelper;
 use Zoren\SupremeSpoon\Config;
 
+date_default_timezone_set('UTC');
+
 /* 
  * The autoload function is called when you try to initialize a class which
  * does not exist. It's the responsbility of the autoloader to find the file
@@ -23,7 +25,6 @@ $api = new RedditAPI();
 $config = new Config();
 $dbhelper = new DBHelper($config);
 $template = new TemplateRenderer(new RegExp());
-date_default_timezone_set('UTC');
 
 $mostrecentpost = $dbhelper->fetchMostRecent($config->get('subreddit'));
 
