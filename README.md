@@ -16,3 +16,19 @@ Once packages are installed, compile the CSS using the command at the base of th
 npm run build-css
 ```
 
+To add the database locally, add posts table.
+
+```
+CREATE TABLE `posts` (
+`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+`subreddit` varchar(60) NOT NULL,
+`imageurl` varchar(255) NOT NULL,
+`thumburl` varchar(255) NOT NULL,
+`title` varchar(255) NOT NULL,
+`permalink` varchar(255) NOT NULL,
+`datecreated` datetime NOT NULL,
+PRIMARY KEY (`id`),
+UNIQUE KEY `permalink` (`permalink`),
+KEY `subreddit` (`subreddit`)
+) ENGINE=InnoDB
+```
