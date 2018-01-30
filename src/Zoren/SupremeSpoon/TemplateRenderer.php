@@ -20,28 +20,28 @@ class TemplateRenderer
     $this->regexp = $regexp; 
   } 
   
-	/**
-	 * Function returns page as a string
-	 *
-	 * Usage
-	 * ```
-	 * $api = new RedditAPI();
-	 * $data = $api->fetchPosts('subreddit');
-	 * $template = new TemplateRenderer();
-	 * $template->render($data);
-	 * ```
-	 *
-	 * @param string
-	 */
-	public function render($data) {
-		$page = '';
-		$page .= $this->writeHeader();
-		$page .= $this->writeBanner();
-		$page .= $this->writeSections($data);
-		$page .= $this->writeFooter();
+  /**
+   * Function returns page as a string
+   *
+   * Usage
+   * ```
+   * $api = new RedditAPI();
+   * $data = $api->fetchPosts('subreddit');
+   * $template = new TemplateRenderer();
+   * $template->render($data);
+   * ```
+   *
+   * @param string
+   */
+  public function render($data) {
+    $page = '';
+    $page .= $this->writeHeader();
+    $page .= $this->writeBanner();
+    $page .= $this->writeSections($data);
+    $page .= $this->writeFooter();
 
-		echo $page;
-	}
+    echo $page;
+  }
   /**
    * Renders the error message page.
    *
@@ -60,42 +60,42 @@ class TemplateRenderer
     $page .= $this->writeFooter();
   }
 
-	/** 
-	 * Writes HTTP Headers, Custom CSS
-	 * 
-	 * @return string
-	 */
-	protected function writeHeader() {
-		$header = "
-		<!DOCTYPE html>
- 			<html lang='en'>
-  			<head>
-    		<meta charset='utf-8'>
-    		<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
-    		<meta name='description' content='The Supreme Spoon'>
-    		<meta name='author' content=''>
-    		<title>The Supreme Spoon</title>
-    		<!-- Bootstrap core CSS -->
-    		<link href='node_modules/bootstrap/dist/css/bootstrap.min.css' rel='stylesheet'>
-    		<!-- Custom fonts for this template -->
-    		<link href='https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900' rel='stylesheet'>
-    		<link href='https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i' rel='stylesheet'>
-    		<!-- Custom styles for this template -->
-    		<link href='css/main.css' rel='stylesheet'>
-    		<!-- Font Awesome -->
-    		<link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'> </head>";
+  /** 
+   * Writes HTTP Headers, Custom CSS
+   * 
+   * @return string
+   */
+  protected function writeHeader() {
+    $header = "
+    <!DOCTYPE html>
+      <html lang='en'>
+        <head>
+        <meta charset='utf-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+        <meta name='description' content='The Supreme Spoon'>
+        <meta name='author' content=''>
+        <title>The Supreme Spoon</title>
+        <!-- Bootstrap core CSS -->
+        <link href='node_modules/bootstrap/dist/css/bootstrap.min.css' rel='stylesheet'>
+        <!-- Custom fonts for this template -->
+        <link href='https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i' rel='stylesheet'>
+        <!-- Custom styles for this template -->
+        <link href='css/main.css' rel='stylesheet'>
+        <!-- Font Awesome -->
+        <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'> </head>";
 
-    	return $header;
-	} // End writeHeader
+      return $header;
+  } // End writeHeader
 
-	/** 
-	 * Renders header at the top of the page
-	 *
-	 * @return string
-	 */
-	protected function writeBanner() {
-		$banner = "
-  		<div class='wrapper'>
+  /** 
+   * Renders header at the top of the page
+   *
+   * @return string
+   */
+  protected function writeBanner() {
+    $banner = "
+      <div class='wrapper'>
         <!-- Sidebar Holder -->
         <nav id='sidebar'>
             <div id='dismiss'> <i class='fa fa-close'></i> </div>
@@ -156,51 +156,51 @@ class TemplateRenderer
             <!-- End header -->";
 
         return $banner;
-	} // End writeBanner
+  } // End writeBanner
 
-	/**
-	 * Creates content sections in the middle of the page
-	 * ``
-	 *
-	 * @return string
-	 */
-	protected function writeSections($data) {
-		$content = ''; // Accumulates content from Reddit Images
-  		// Navigates JSON data to access Reddit threads
-		foreach($data as $array) {
-			$imageurl = $array['imageurl'];
-   		 	$thumbnailurl = $array['thumburl'];
-    		$title =  $array['title'];
-    		$permalink = $array['permalink'];
+  /**
+   * Creates content sections in the middle of the page
+   * ``
+   *
+   * @return string
+   */
+  protected function writeSections($data) {
+    $content = ''; // Accumulates content from Reddit Images
+      // Navigates JSON data to access Reddit threads
+    foreach($data as $array) {
+      $imageurl = $array['imageurl'];
+        $thumbnailurl = $array['thumburl'];
+        $title =  $array['title'];
+        $permalink = $array['permalink'];
 
-	      	$content .= 
-  	      	 	"<div class='container'>
-    	        <div class='row align-items-center'>
+          $content .= 
+          "<div class='container'>
+            <div class='row align-items-center'>
                 <div class='col-lg-6 order-lg-2'>
-                  <div class='p-5'>
-                      <img class='img-fluid' src=${imageurl} width='300px' height='300px' alt=''>
-            	</div>
-              	</div>
-                <div class='col-lg-6 order-lg-1'>
-                  <div class='p-5'>
-                      <h2 class='display-5'>
+                    <div class='p-5'>
+                        <img class='img-fluid' src=${imageurl} width='300px' height='300px' alt=''>
+                    </div>
+                </div>
+            <div class='col-lg-6 order-lg-1'>
+                <div class='p-5'>
+                    <h2 class='display-5'>
                         <a href='https://reddit.com${permalink}'> ${title} </a>
-                      </h2>
-                      <p>Placeholder Text</p>
-                </div></div></div></div></section>";
-		} // End foreach
+                    </h2>
+                <p>Placeholder Text</p>
+            </div></div></div></div></section>";
+    } // End foreach
 
-		return $content;
-	} // End of writeSections function
+    return $content;
+  } // End of writeSections function
 
-	/**
-	 * Creates footer of a page
-	 * ``
-	 *
-	 * @return string
-	 */
-	protected function writeFooter() {
-		$footer = "
+  /**
+   * Creates footer of a page
+   * ``
+   *
+   * @return string
+   */
+  protected function writeFooter() {
+    $footer = "
             <footer class='py-5 bg-black'>
                 <div class='container'>
                     <p class='m-0 text-center text-white small'>Copyright &copy; Supreme Spoon 2018</p>
@@ -209,20 +209,20 @@ class TemplateRenderer
             </footer>
         </div>
         <!-- End content -->
-    	</div>
-   		<!-- End Wrapper -->
-    	<div class='overlay'></div>
-    	<!-- Bootstrap core JavaScript -->
-    	<script src='node_modules/tether/dist/js/tether.js'></script>
-    	<script src='node_modules/jquery/dist/jquery.min.js'></script>
-    	<script src='node_modules/bootstrap/dist/js/bootstrap.js'></script>
-    	<script src='js/sidebar.js'></script>
-    	<script src='js/customScrollbar.min.js'></script>
-		</body>
-		</html>";
+      </div>
+      <!-- End Wrapper -->
+      <div class='overlay'></div>
+      <!-- Bootstrap core JavaScript -->
+      <script src='node_modules/tether/dist/js/tether.js'></script>
+      <script src='node_modules/jquery/dist/jquery.min.js'></script>
+      <script src='node_modules/bootstrap/dist/js/bootstrap.js'></script>
+      <script src='js/sidebar.js'></script>
+      <script src='js/customScrollbar.min.js'></script>
+    </body>
+    </html>";
 
-		return $footer;
-	} // End writeFooter
+    return $footer;
+  } // End writeFooter
 
   /**
    * Write section if an error message if error is caught
@@ -231,6 +231,7 @@ class TemplateRenderer
   protected function writeError($errormessage) {
     $content = "
       <div class='container'>
+        <div class='display-5'>
         <h2 class='display-5'>
           <p> Error! The site is temporarily unavailable: ${errormessage} </p>
         </h2>
