@@ -1,0 +1,11 @@
+{
+    "name": "zoren2/supreme-spoon",
+    "description": "Humor served utilizing Reddit API.",
+    "autoload": {
+        "psr-0": {
+            "Zoren\\": "src/"
+        }
+    },
+    "require": {},
+    "require-dev": {}
+}
