@@ -5,21 +5,21 @@ namespace Zoren\SupremeSpoon;
  */ 
 class TemplateRenderer
 {
-	/**
-	 * @var RegExp
-	 */
-	protected $regexp;
-
-	/**
-	 * Constructor 
-	 *
-	 * @param RegExp $regexp
-	 */
-	public function __construct(RegExp $regexp)
-	{
-		$this->regexp = $regexp;
-	}
-
+  /** 
+   * @var RegExp 
+   */ 
+  protected $regexp; 
+ 
+  /** 
+   * Constructor  
+   * 
+   * @param RegExp $regexp 
+   */ 
+  public function __construct(RegExp $regexp) 
+  { 
+    $this->regexp = $regexp; 
+  } 
+  
 	/**
 	 * Function returns page as a string
 	 *
@@ -42,6 +42,23 @@ class TemplateRenderer
 
 		echo $page;
 	}
+  /**
+   * Renders the error message page.
+   *
+   * Usage
+   * ```
+   * try {...} catch (PDOException $errormessage) { 
+   * $template->renderError($errormessage);
+   * }
+   * ```
+   */
+  public function renderError($errormessage) {
+    $page = '';
+    $page .= $this->writeHeader();
+    $page .= $this->writeBanner();
+    $page .= $this->writeError($errormessage);
+    $page .= $this->writeFooter();
+  }
 
 	/** 
 	 * Writes HTTP Headers, Custom CSS
@@ -148,18 +165,15 @@ class TemplateRenderer
 	 * @return string
 	 */
 	protected function writeSections($data) {
-
 		$content = ''; // Accumulates content from Reddit Images
   		// Navigates JSON data to access Reddit threads
-		foreach($data['data']['children'] as $children) {
-			$imageurl = $children['data']['url'];
-   		 	$thumbnailurl = $children['data']['thumbnail'];
-    		$title = $children['data']['title'];
-    		$redditurl = $children['data']['permalink'];
+		foreach($data as $array) {
+			$imageurl = $array['imageurl'];
+   		 	$thumbnailurl = $array['thumburl'];
+    		$title =  $array['title'];
+    		$permalink = $array['permalink'];
 
-    		if($this->regexp->urlContainsImage($imageurl))
-    		 {
-	      		$content .= 
+	      	$content .= 
   	      	 	"<div class='container'>
     	        <div class='row align-items-center'>
                 <div class='col-lg-6 order-lg-2'>
@@ -170,11 +184,10 @@ class TemplateRenderer
                 <div class='col-lg-6 order-lg-1'>
                   <div class='p-5'>
                       <h2 class='display-5'>
-                        <a href='https://reddit.com${redditurl}'> ${title} </a>
+                        <a href='https://reddit.com${permalink}'> ${title} </a>
                       </h2>
                       <p>Placeholder Text</p>
                 </div></div></div></div></section>";
-    		} // End If
 		} // End foreach
 
 		return $content;
@@ -211,6 +224,18 @@ class TemplateRenderer
 		return $footer;
 	} // End writeFooter
 
+  /**
+   * Write section if an error message if error is caught
+   * 
+   */
+  protected function writeError($errormessage) {
+    $content = "
+      <div class='container'>
+        <h2 class='display-5'>
+          <p> Error! The site is temporarily unavailable: ${errormessage} </p>
+        </h2>
+      </div></div>";
+  }
 } // End class
 
-?>
+

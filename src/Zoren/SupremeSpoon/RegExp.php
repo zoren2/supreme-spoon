@@ -13,7 +13,5 @@ class RegExp {
 	public function urlContainsImage($imageurl){
 			return preg_match('/\bhttps?:\/\/\S+(?:png|jpg|gif)\b/', $imageurl);
 	} // End of urlContainsImage function
-	
-} // End class
 
-?>
+} // End class
