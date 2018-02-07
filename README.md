@@ -16,7 +16,7 @@ Once packages are installed, compile the CSS using the command at the base of th
 npm run build-css
 ```
 
-To add the database locally, add posts table.
+To add the database locally, add the posts table using this command.
 
 ```
 CREATE TABLE `posts` (
@@ -31,4 +31,10 @@ PRIMARY KEY (`id`),
 UNIQUE KEY `permalink` (`permalink`),
 KEY `subreddit` (`subreddit`)
 ) ENGINE=InnoDB
+```
+
+To enable logging, you may need to set permissions to the log file to 777. In the terminal inside /logs -
+
+```
+chmod 777 supremespoon.log
 ```

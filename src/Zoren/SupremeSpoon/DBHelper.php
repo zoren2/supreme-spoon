@@ -149,7 +149,4 @@ class DBHelper
             }
         return $this->conn;
     }
-
-
-
 } // End class
