@@ -6,6 +6,8 @@
             "Zoren\\": "src/"
         }
     },
-    "require": {},
+    "require": {
+        "monolog/monolog": "^1.23"
+    },
     "require-dev": {}
 }

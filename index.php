@@ -1,21 +1,7 @@
 <?php
-use Zoren\SupremeSpoon\RedditAPI;
-use Zoren\SupremeSpoon\TemplateRenderer;
-use Zoren\SupremeSpoon\RegExp;
-use Zoren\SupremeSpoon\DBHelper;
-use Zoren\SupremeSpoon\Config;
+include('bootstrap.php');
 
-date_default_timezone_set('UTC');
-
-require(__DIR__ . '/vendor/autoload.php');
-
-// Instantiate template and helper classes
-$api      = new RedditAPI();
-$config   = new Config();
-$dbhelper = new DBHelper($config);
-$template = new TemplateRenderer(new RegExp());
-
-$mostrecentpost = $dbhelper->fetchMostRecent($config->get('subreddit'));
+$mostrecentpost = $dbhelper->fetchMostRecent($config->get('subreddit')); // Retrieves most recent post to see how much time has elapsed
 
 try {
     if (!$data || (time() - strtotime($mostrecentpost)) > 600) {
@@ -26,4 +12,5 @@ try {
     $template->render($data);
 } catch (PDOException $errormessage) {
     $template->renderError($errormessage);
+    $log->error($errormesssage);
 }

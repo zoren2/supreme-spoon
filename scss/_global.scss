@@ -30,3 +30,19 @@ h6 {
 .rounded-pill {
   border-radius: 5rem;
 }
+
+section:hover {
+  background-color: $gray-300;
+  transition: background 0.25s linear;
+}
+
+/* Every other color of a section */
+section:nth-child(even) {
+  background-color: $gray-100;
+}
+
+section:nth-child(even):hover {
+  background-color: $gray-200;
+  transition: background 0.25s linear;
+}
+

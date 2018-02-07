@@ -1,9 +1,15 @@
 <?php
 namespace Zoren\SupremeSpoon;
 use PDO;
+use Monolog\Logger;
 
 class DBHelper
 {
+
+	/**
+	 * @var Logger
+	 */
+	protected $log = null;
 
 	/**
 	 * @var PDO
@@ -41,17 +47,20 @@ class DBHelper
                         (subreddit, imageurl, thumburl, title, permalink, datecreated)
                         VALUES (:subreddit, :imageurl, :thumburl, :title, :permalink, :datecreated)";
 		$stmt = $this->conn->prepare($sqlquery);
-		
+
 		foreach($resp as $key => $array) {
 			if(!$this->fetchPermalink($array['permalink'])) {
-                $stmt->execute([
+			    $params = [
                     'subreddit'     => $array['subreddit'],
                     'imageurl'      => $array['imageurl'],
                     'thumburl'      => $array['thumburl'],
                     'title'         => $array['title'],
                     'permalink'     => $array['permalink'],
                     'datecreated'   => $array['datecreated']
-                ]);
+                ];
+                $this->updateLog($sqlquery, $params);
+                $stmt->execute($params);
+
 			}
 		} // End foreach
 		return true;
@@ -97,6 +106,22 @@ class DBHelper
 	}
 
 	/**
+	 * Sets DBHelper's logger file. Requires instance of 
+	 * a Monolog Logger.
+	 */
+	public function setLogger($log) {
+		$this->log = $log;
+	}
+
+    /**
+     * Updates logs with SQL Queries.
+     *
+     */
+	private function updateLog($message, $params) {
+	    $this->log->info($message, $params);
+    }
+
+	/**
 	 * Returns true if a post is already in the DB. Returns false otherwise.
 	 *
 	 * @return bool
@@ -109,6 +134,7 @@ class DBHelper
 		$stmt->bindParam(':permalink', $permalink, PDO::PARAM_STR);
 		$stmt->execute();
 		$row = $stmt->fetch();
+
 		return $row['permalink'] == $permalink; // Found duplicate
 	}
 
@@ -123,4 +149,7 @@ class DBHelper
             }
         return $this->conn;
     }
-}
+
+
+
+} // End class
