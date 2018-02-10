@@ -1,6 +1,8 @@
 <?php
 namespace Zoren\SupremeSpoon;
 
+use const E_DEPRECATED;
+
 class Config
 {
   /**
@@ -36,13 +38,16 @@ class Config
   protected function getDefaults()
   {
     return [
-      "database" => [
-        "host" => "localhost",
-        "name" => "mlss",
-        "user" => "mlss_user",
-        "pass" => "mlss_pass"
-      ],
-      "subreddit" => "funny"
+        "database" => [
+            "host" => "localhost",
+            "name" => "mlss",
+            "user" => "mlss_user",
+            "pass" => "mlss_pass"
+        ],
+        "timezone" => "UTC",
+        "error_reporting" => E_ALL | E_DEPRECATED,
+        "display_errors"  => true,
+        "subreddit" => "funny"
     ];
   }
 }
