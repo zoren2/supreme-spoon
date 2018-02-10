@@ -4,10 +4,10 @@ Humor served utilizing Reddit API.
 
 ## Installing Vendors
 
-In order to install Bootstrap 4 and retrieve proper vendors, go into command line 
+In order to install vendors, go into command line 
 
 ```
-npm install bootstrap@4.0.0-alpha.6
+npm install
 ```
 
 Once packages are installed, compile the CSS using the command at the base of the project (inside supreme-spoon).
