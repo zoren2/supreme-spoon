@@ -1,8 +1,6 @@
 <?php
 namespace Zoren\SupremeSpoon;
 
-use const E_DEPRECATED;
-
 class Config
 {
   /**
