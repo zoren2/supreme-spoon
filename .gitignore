@@ -23,4 +23,4 @@
 /.cache
 /css/main.css
 .DS_Store
-
+logs/*
